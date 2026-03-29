@@ -1,30 +1,68 @@
-import { saveTasks } from "./storage.js";
+/**
+ * @fileoverview tasks.js
+ * Handles rendering tasks on the Kanban board.
+ */
+
+import { loadTasks } from "./storage.js";
+import { openTaskModal } from "./modal.js";
 
 /**
- * Tasks state
+ * Renders all tasks from local storage into their correct columns.
+ * Clears existing content first to avoid duplicates.
+ * Updates column header counts after rendering.
+ * @returns {void}
  */
-export let tasks = [];
+export function renderTasks() {
+  const todoCont = document.getElementById("todo-tasks-container");
+  const doingCont = document.getElementById("doing-tasks-container");
+  const doneCont = document.getElementById("done-tasks-container");
 
-/**
- * Set tasks
- */
-export function setTasks(newTasks) {
-  tasks = newTasks;
-  saveTasks(tasks);
+  todoCont.innerHTML = "";
+  doingCont.innerHTML = "";
+  doneCont.innerHTML = "";
+
+  let todoCount = 0;
+  let doingCount = 0;
+  let doneCount = 0;
+
+  const tasks = loadTasks();
+
+  tasks.forEach((task) => {
+    const taskCard = createTaskCard(task);
+
+    if (task.status === "todo") {
+      todoCont.appendChild(taskCard);
+      todoCount++;
+    } else if (task.status === "doing") {
+      doingCont.appendChild(taskCard);
+      doingCount++;
+    } else if (task.status === "done") {
+      doneCont.appendChild(taskCard);
+      doneCount++;
+    }
+  });
+
+  document.getElementById("toDoText").textContent = `TODO (${todoCount})`;
+  document.getElementById("doingText").textContent = `DOING (${doingCount})`;
+  document.getElementById("doneText").textContent = `DONE (${doneCount})`;
 }
 
 /**
- * Add task
+ * Creates a single task card HTML element.
+ * @param {Object} task - The task object to render.
+ * @param {number} task.id - Unique task ID.
+ * @param {string} task.title - The task title.
+ * @param {string} task.description - The task description.
+ * @param {string} task.status - The task status.
+ * @returns {HTMLDivElement} The task card element.
  */
-export function addTask(task) {
-  tasks.push(task);
-  saveTasks(tasks);
-}
+export function createTaskCard(task) {
+  const taskCard = document.createElement("div");
+  taskCard.classList.add("task-div");
+  taskCard.textContent = task.title;
+  taskCard.dataset.taskId = task.id;
 
-/**
- * Update task
- */
-export function updateTask(updatedTask) {
-  tasks = tasks.map(t => (t.id === updatedTask.id ? updatedTask : t));
-  saveTasks(tasks);
+  taskCard.addEventListener("click", () => openTaskModal(task));
+
+  return taskCard;
 }

@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +11,8 @@
 
   <link rel="stylesheet" href="./style.css" />
 
-  <!-- initialData.js must load before scripts.js -->
   <script src="./initialData.js"></script>
-  <script defer src="./scripts.js"></script>
+  <script type="module" src="./js/main.js"></script>
 
   <title>Kanban Task Management</title>
 </head>
@@ -26,7 +24,6 @@
     <div id="side-logo-div">
       <img id="logo" src="./logo-light.svg" alt="Kanban Logo" />
     </div>
-
     <div class="boards-nav-links-div" id="boards-nav-links-div">
       <h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
       <button class="board-btn">Launch Career</button>
@@ -38,15 +35,13 @@
 
     <header id="header">
       <div class="header-name-div">
-        <img
-          src="./logo-light.svg"
-          alt="logo-mobile"
-          class="logo-mobile"
-        />
-        <h2 class="header-board-name" id="header-board-name">
-          Launch Career
-        </h2>
+        <img src="./logo-light.svg" alt="logo-mobile" class="logo-mobile" />
+        <h2 class="header-board-name" id="header-board-name">Launch Career</h2>
       </div>
+      <button class="add-task-btn" id="add-task-btn">
+        <span class="add-task-btn-text">+ Add New Task</span>
+        <span class="add-task-btn-icon">+</span>
+      </button>
     </header>
 
     <div class="container">
@@ -58,7 +53,6 @@
             <span class="dot" id="todo-dot"></span>
             <h4 id="toDoText" class="columnHeader">TODO (0)</h4>
           </div>
-
           <div class="tasks-container" id="todo-tasks-container"></div>
         </div>
 
@@ -68,7 +62,6 @@
             <span class="dot" id="doing-dot"></span>
             <h4 id="doingText" class="columnHeader">DOING (0)</h4>
           </div>
-
           <div class="tasks-container" id="doing-tasks-container"></div>
         </div>
 
@@ -78,7 +71,6 @@
             <span class="dot" id="done-dot"></span>
             <h4 id="doneText" class="columnHeader">DONE (0)</h4>
           </div>
-
           <div class="tasks-container" id="done-tasks-container"></div>
         </div>
 
@@ -86,33 +78,19 @@
     </div>
   </div>
 
-  <!-- Task Modal -->
+  <!-- View/Edit Task Modal -->
   <div class="modal-backdrop" id="modal-backdrop">
-
     <div class="modal" id="task-modal">
-
       <div class="modal-header">
         <h3 class="modal-heading">Task</h3>
         <button class="modal-close-btn" id="modal-close-btn">&times;</button>
       </div>
-
       <div class="modal-body">
-
         <label class="modal-label" for="modal-title-input">Title</label>
-        <input
-          type="text"
-          class="modal-input"
-          id="modal-title-input"
-          placeholder="Task title"
-        />
+        <input type="text" class="modal-input" id="modal-title-input" placeholder="Task title" />
 
         <label class="modal-label" for="modal-desc-input">Description</label>
-        <textarea
-          class="modal-textarea"
-          id="modal-desc-input"
-          placeholder="Task description"
-          rows="4"
-        ></textarea>
+        <textarea class="modal-textarea" id="modal-desc-input" placeholder="Task description" rows="4"></textarea>
 
         <label class="modal-label" for="modal-status-select">Status</label>
         <select class="modal-select" id="modal-status-select">
@@ -120,13 +98,35 @@
           <option value="doing">doing</option>
           <option value="done">done</option>
         </select>
-
       </div>
-
     </div>
+  </div>
 
+  <!-- Add New Task Modal -->
+  <div class="modal-backdrop" id="add-task-modal-backdrop">
+    <div class="modal" id="add-task-modal">
+      <div class="modal-header">
+        <h3 class="modal-heading">Add New Task</h3>
+        <button class="modal-close-btn" id="add-modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <label class="modal-label" for="new-task-title">Title</label>
+        <input type="text" class="modal-input" id="new-task-title" placeholder="e.g. Take chilled break" />
+
+        <label class="modal-label" for="new-task-desc">Description</label>
+        <textarea class="modal-textarea" id="new-task-desc" placeholder="e.g. Pet your dog, have a cup of coffee, dance to your favourite song and come back to crush this challenge." rows="4"></textarea>
+
+        <label class="modal-label" for="new-task-status">Status</label>
+        <select class="modal-select" id="new-task-status">
+          <option value="todo">todo</option>
+          <option value="doing">doing</option>
+          <option value="done">done</option>
+        </select>
+
+        <button class="create-task-btn" id="create-task-btn">Create Task</button>
+      </div>
+    </div>
   </div>
 
 </body>
 </html>
-```

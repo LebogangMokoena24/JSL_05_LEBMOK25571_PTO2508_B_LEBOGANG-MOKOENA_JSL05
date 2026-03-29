@@ -1,39 +1,25 @@
-import { loadTasks } from "./storage.js";
-import { setTasks, tasks } from "./tasks.js";
-import { openModal, closeModal, saveTask } from "./modal.js";
-import { renderTasks } from "./ui.js";
+/**
+ * @fileoverview main.js
+ * Entry point for the Kanban Task Management application.
+ *
+ * Module responsibilities:
+ *  - storage.js  → Read and write tasks to local storage
+ *  - tasks.js    → Render task cards onto the board
+ *  - modal.js    → Handle all modal open, close, and submit interactions
+ *  - main.js     → Boot the app (this file)
+ */
+
+import { renderTasks } from "./tasks.js";
+import { attachModalEventListeners } from "./modal.js";
 
 /**
- * Initialize app
+ * Initializes the application.
+ * Renders tasks from local storage and attaches all event listeners.
+ * @returns {void}
  */
 function init() {
-  const stored = loadTasks();
-
-  if (stored) {
-    setTasks(stored);
-  } else {
-    import("../data/initialData.js").then(module => {
-      setTasks(module.initialTasks);
-    });
-  }
-
   renderTasks();
-  attachEvents();
-}
-
-/**
- * Attach events
- */
-function attachEvents() {
-  document.getElementById("add-task-btn").addEventListener("click", () => openModal());
-
-  document.getElementById("save-task-btn").addEventListener("click", () => saveTask(renderTasks));
-
-  document.getElementById("modal-close-btn").addEventListener("click", closeModal);
-
-  document.getElementById("modal-backdrop").addEventListener("click", (e) => {
-    if (e.target.id === "modal-backdrop") closeModal();
-  });
+  attachModalEventListeners();
 }
 
 document.addEventListener("DOMContentLoaded", init);

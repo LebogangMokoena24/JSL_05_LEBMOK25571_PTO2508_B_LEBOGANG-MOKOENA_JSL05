@@ -136,10 +136,6 @@ export function attachModalEventListeners() {
     }
   });
 
-  document.getElementById("modal-title-input").addEventListener("input", saveTaskChanges);
-  document.getElementById("modal-desc-input").addEventListener("input", saveTaskChanges);
-  document.getElementById("modal-status-select").addEventListener("change", saveTaskChanges);
-
   const addModalBackdrop = document.getElementById("add-task-modal-backdrop");
   const addModal = document.getElementById("add-task-modal");
   const addModalCloseBtn = document.getElementById("add-modal-close-btn");

@@ -1,0 +1,132 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;1,400&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="./style.css" />
+
+  <!-- initialData.js must load before scripts.js -->
+  <script src="./initialData.js"></script>
+  <script defer src="./scripts.js"></script>
+
+  <title>Kanban Task Management</title>
+</head>
+
+<body>
+
+  <!-- Sidebar -->
+  <nav class="side-bar" id="side-bar-div">
+    <div id="side-logo-div">
+      <img id="logo" src="./logo-light.svg" alt="Kanban Logo" />
+    </div>
+
+    <div class="boards-nav-links-div" id="boards-nav-links-div">
+      <h4 id="headline-sidepanel">ALL BOARDS (1)</h4>
+      <button class="board-btn">Launch Career</button>
+    </div>
+  </nav>
+
+  <!-- Main Layout -->
+  <div id="layout">
+
+    <header id="header">
+      <div class="header-name-div">
+        <img
+          src="./logo-light.svg"
+          alt="logo-mobile"
+          class="logo-mobile"
+        />
+        <h2 class="header-board-name" id="header-board-name">
+          Launch Career
+        </h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <main class="card-column-main">
+
+        <!-- TODO Column -->
+        <div class="column-div" data-status="todo">
+          <div id="todo-head-div" class="column-head-div">
+            <span class="dot" id="todo-dot"></span>
+            <h4 id="toDoText" class="columnHeader">TODO (0)</h4>
+          </div>
+
+          <div class="tasks-container" id="todo-tasks-container"></div>
+        </div>
+
+        <!-- DOING Column -->
+        <div class="column-div" data-status="doing">
+          <div id="doing-head-div" class="column-head-div">
+            <span class="dot" id="doing-dot"></span>
+            <h4 id="doingText" class="columnHeader">DOING (0)</h4>
+          </div>
+
+          <div class="tasks-container" id="doing-tasks-container"></div>
+        </div>
+
+        <!-- DONE Column -->
+        <div class="column-div" data-status="done">
+          <div id="done-head-div" class="column-head-div">
+            <span class="dot" id="done-dot"></span>
+            <h4 id="doneText" class="columnHeader">DONE (0)</h4>
+          </div>
+
+          <div class="tasks-container" id="done-tasks-container"></div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Task Modal -->
+  <div class="modal-backdrop" id="modal-backdrop">
+
+    <div class="modal" id="task-modal">
+
+      <div class="modal-header">
+        <h3 class="modal-heading">Task</h3>
+        <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+      </div>
+
+      <div class="modal-body">
+
+        <label class="modal-label" for="modal-title-input">Title</label>
+        <input
+          type="text"
+          class="modal-input"
+          id="modal-title-input"
+          placeholder="Task title"
+        />
+
+        <label class="modal-label" for="modal-desc-input">Description</label>
+        <textarea
+          class="modal-textarea"
+          id="modal-desc-input"
+          placeholder="Task description"
+          rows="4"
+        ></textarea>
+
+        <label class="modal-label" for="modal-status-select">Status</label>
+        <select class="modal-select" id="modal-status-select">
+          <option value="todo">todo</option>
+          <option value="doing">doing</option>
+          <option value="done">done</option>
+        </select>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
+```

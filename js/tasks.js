@@ -25,7 +25,7 @@ export function renderTasks() {
   let doingCount = 0;
   let doneCount = 0;
 
-  const tasks = loadTasks();
+ const tasks = loadTasks() || [];
 
   tasks.forEach((task) => {
     const taskCard = createTaskCard(task);
